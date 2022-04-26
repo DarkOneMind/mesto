@@ -16,5 +16,5 @@
 
 **Git Pages**
 
-* [Ссылка на сайт в GitHub Pages](https://github.com/DarkOneMind/mesto.git/index.html)
+* [Ссылка на сайт в GitHub Pages](https://darkonemind.github.io/Mesto/index.html)
 
