@@ -1,0 +1,10 @@
+.element__card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 282px;
+  min-height: 79px;
+  background: #FFFFFF;
+  border-radius: 0 0 10px 10px;
+}

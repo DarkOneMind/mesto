@@ -1,0 +1,18 @@
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  top: 195px;
+  left: 425px;
+  right: 425px;
+  bottom: 195px;
+}
+
+@media (max-width: 480px) {
+  .popup {
+    top: 123px;
+    left: 19px;
+    right: 19px;
+    bottom: 123px;
+  }
+}
