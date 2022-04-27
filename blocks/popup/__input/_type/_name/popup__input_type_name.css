@@ -4,3 +4,10 @@
   margin-right: auto;
   margin-bottom: 0;
 }
+
+@media (max-width: 480px) {
+  .popup__input_type_name {
+    margin-top: 75px;
+    margin-left: 22px;
+  }
+}

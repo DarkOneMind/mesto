@@ -1,5 +1,4 @@
 .header__logo {
-  background-image: url(../../../image/logo.png);
   max-width: 142px;
   height: 33px;
   margin: 0;
@@ -7,8 +6,8 @@
 
 @media (max-width: 480px) {
   .header__logo {
-    min-width: 104px;
-    min-height: 24px;
+    max-width: 104px;
+    height: 24px;
     margin-left: 27px;
   }
 }

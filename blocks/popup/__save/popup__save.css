@@ -23,10 +23,13 @@
 
 @media (max-width: 480px) {
     .popup__save {
-      width: 238px;
-      height: 46px;
+      max-width: 238px;
+      min-height: 46px;
       margin-top: 45px;
       margin-left: 22px;
       margin-bottom: 25px;
+      font-size: 14px;
+      line-height: 17px;
+      padding: 0;
     }
   }

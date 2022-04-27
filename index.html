@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./vendor/normalize.css">
   <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="page">
 <header class="header">
-    <div class="header__logo"></div>
+    <img src="./image/logo.png" alt="Логотип" class="header__logo">
 </header>
 <main class="content">
     <section class="profile">
@@ -26,42 +25,42 @@
     <section class="elements">
         <article class="element">
         <img class="element__photo" src="./image/kirill-pershin-1088404-unsplash.png" alt="Карачаевск">
-        <div class="element__card">
+        <div class="element__description">
             <h2 class="element__title">Карачаевск</h2>   
             <button class="element__like-button" type="button"></button>
         </div>
         </article>
         <article class="element">
         <img class="element__photo" src="./image/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбус">
-            <div class="element__card">
+            <div class="element__description">
                 <h2 class="element__title">Гора Эльбус</h2>   
                 <button class="element__like-button" type="button"></button>
             </div>
         </article>
         <article class="element">
         <img class="element__photo" src="./image/kirill-pershin-1556355-unsplash.png" alt="Домбай">
-            <div class="element__card">
+            <div class="element__description">
                 <h2 class="element__title">Домбай</h2>   
                 <button class="element__like-button" type="button"></button>
             </div>
         </article>
         <article class="element">
         <img class="element__photo" src="./image/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбус">
-            <div class="element__card">
+            <div class="element__description">
                 <h2 class="element__title">Гора Эльбус</h2>   
                 <button class="element__like-button" type="button"></button>
             </div>
         </article>
         <article class="element">
         <img class="element__photo" src="./image/kirill-pershin-1556355-unsplash.png" alt="Домбай">
-            <div class="element__card">
+            <div class="element__description">
                 <h2 class="element__title">Домбай</h2>   
                 <button class="element__like-button" type="button"></button>
             </div>
         </article>
         <article class="element">
        <img class="element__photo" src="./image/kirill-pershin-1088404-unsplash.png" alt="Карачаевск">
-            <div class="element__card">
+            <div class="element__description">
                 <h2 class="element__title">Карачаево-Ч...</h2>   
                 <button class="element__like-button" type="button"></button>
             </div>
@@ -76,8 +75,8 @@
         <button type="button" class="popup__close">
             <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close">
         </button>
+            <form action="submit" name="ProfileForm" class="popup__form">
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form action="submit" class="popup__form">
             <input type="text" placeholder="Жак-Ив Кусто" name="name" class="popup__input popup__input_type_name">
             <input type="text" placeholder="Исследователь океана" name="personal" class="popup__input popup__input_type_personal">
             <button type="submit" class="popup__save">Сохранить</button>
