@@ -10,10 +10,17 @@
   padding: 0;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 880px) {
+	.profile {
+		margin-left: 27px;
+	}
+}
+
+@media (max-width: 700px) {
 	.profile {
 		min-width: 282px;
     margin-bottom: 36px;
     flex-direction: column;
+    margin-left: auto;
 	}
 }

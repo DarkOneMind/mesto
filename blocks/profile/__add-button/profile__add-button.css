@@ -17,11 +17,19 @@
   opacity: 0.6;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 880px) {
+	.profile__add-button {
+    margin-right: 27px;
+	}
+}
+
+@media (max-width: 700px) {
 	.profile__add-button {
     background-image: url(../../../image/addbutton-2.svg);
 		max-width: 282px;
     width: 100%;
     margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
 	}
 }

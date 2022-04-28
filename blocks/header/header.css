@@ -10,7 +10,7 @@
   border-bottom-color: #545454;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .header {
     max-width: 320px;
     height: 56px;
