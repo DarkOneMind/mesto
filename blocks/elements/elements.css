@@ -1,6 +1,6 @@
 .elements {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(282px, 1fr));
   grid-template-rows: repeat(2, 1fr);
   max-width: 880px;
   gap: 20px 17px;
@@ -9,9 +9,8 @@
 
 @media (max-width: 880px) {
   .elements {
-    max-width: 500px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(2, minmax(50px, 282px));
+    justify-content: center;
   }
 }
 

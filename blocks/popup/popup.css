@@ -8,7 +8,7 @@
   bottom: 195px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1279px) {
   .popup {
     top: 123px;
     left: 19px;
