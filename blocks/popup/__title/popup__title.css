@@ -10,11 +10,11 @@
   padding: 0;
 }
 
-@media (max-width: 480px) {
-    .popup__title {
-      font-size: 18px;
-      line-height: 22px;
-      margin-top: 22px;
-      margin-left: 22px;
-    }
+@media (max-width: 880px) {
+  .popup__title {
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 22px;
+    margin-left: 22px;
   }
+}

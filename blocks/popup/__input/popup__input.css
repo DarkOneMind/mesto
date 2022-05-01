@@ -10,8 +10,8 @@
   border-bottom: 1px solid #000000;
 }
 
-@media (max-width: 480px) {
-    .popup__input {
-      max-width: 238px;
-    }
+@media (max-width: 880px) {
+  .popup__input {
+    max-width: 238px;
   }
+}
