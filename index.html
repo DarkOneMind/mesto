@@ -22,50 +22,7 @@
         </div>
         <button class="profile__add-button" type="button"></button>
     </section>
-    <section class="elements">
-        <article class="element">
-        <img class="element__photo" src="./image/kirill-pershin-1088404-unsplash.png" alt="Карачаевск">
-        <div class="element__description">
-            <h2 class="element__title">Карачаевск</h2>   
-            <button class="element__like-button" type="button"></button>
-        </div>
-        </article>
-        <article class="element">
-        <img class="element__photo" src="./image/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбус">
-            <div class="element__description">
-                <h2 class="element__title">Гора Эльбус</h2>   
-                <button class="element__like-button" type="button"></button>
-            </div>
-        </article>
-        <article class="element">
-        <img class="element__photo" src="./image/kirill-pershin-1556355-unsplash.png" alt="Домбай">
-            <div class="element__description">
-                <h2 class="element__title">Домбай</h2>   
-                <button class="element__like-button" type="button"></button>
-            </div>
-        </article>
-        <article class="element">
-        <img class="element__photo" src="./image/kirill-pershin-1404681-unsplash.png" alt="Гора Эльбус">
-            <div class="element__description">
-                <h2 class="element__title">Гора Эльбус</h2>   
-                <button class="element__like-button" type="button"></button>
-            </div>
-        </article>
-        <article class="element">
-        <img class="element__photo" src="./image/kirill-pershin-1556355-unsplash.png" alt="Домбай">
-            <div class="element__description">
-                <h2 class="element__title">Домбай</h2>   
-                <button class="element__like-button" type="button"></button>
-            </div>
-        </article>
-        <article class="element">
-       <img class="element__photo" src="./image/kirill-pershin-1088404-unsplash.png" alt="Карачаевск">
-            <div class="element__description">
-                <h2 class="element__title">Карачаево-Ч...</h2>   
-                <button class="element__like-button" type="button"></button>
-            </div>
-        </article>
-    </section>
+    <section class="elements"></section>
 </main>
 <footer class="footer">
     <h2 class="footer__copyright">&copy; 2022 Mesto Russia</h2>
@@ -75,7 +32,7 @@
         <button type="button" class="popup__close">
             <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close">
         </button>
-            <form action="submit" name="ProfileForm" class="popup__form">
+            <form action="submit" name="ProfileForm" class="popup__form popup__form_edit">
             <h2 class="popup__title">Редактировать профиль</h2>
             <input type="text" placeholder="Жак-Ив Кусто" name="name" class="popup__input popup__input_type_name">
             <input type="text" placeholder="Исследователь океана" name="personal" class="popup__input popup__input_type_personal">
@@ -83,6 +40,39 @@
         </form>
     </div>
 </section>
+        <section class="popup popup_add">
+            <div class="popup__container">
+                <button type="button" class="popup__close">
+                    <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close popup__close_add">
+                </button>
+                <form action="submit" name="ProfileForm" class="popup__form popup__form_add">
+                <h2 class="popup__title">Новое место</h2>
+                <input type="text" placeholder="Название" name="Add-name" class="popup__input popup__input_type_name">
+                <input type="url" placeholder="Ссылка на картинку" name="Url-image" class="popup__input popup__input_type_personal">
+                <button type="submit" class="popup__save popup__save_add">Создать</button>
+            </form>
+        </div>
+        </section>
+        <div class="popup popup_active">
+            <div class="popup__content">
+            <button class="popup__close" type="button">
+                <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close popup__close_image">
+            </button>
+            <img class="popup__photo" alt="#" src="#">
+            <h2 class="popup__description"></h2>
+        </div>
+    </div>
+        <template id='template'>
+            <article class="element">
+                <img class="element__photo" src="#" alt="#">
+                <button class="element__delete-button" type="button"></button>
+                <div class="element__description">
+                  <h2 class="element__title"></h2>
+                  <button class="element__like-button" type="button"></button>
+                </div>
+            </article>
+        </template>
+
 <script src="./script/script.js"></script>
 </body>
 </html>
