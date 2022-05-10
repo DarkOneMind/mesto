@@ -1,78 +1,77 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
-  <title>Mesto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
 </head>
+
 <body class="page">
-<header class="header">
-    <img src="./image/logo.png" alt="Логотип" class="header__logo">
-</header>
-<main class="content">
-    <section class="profile">
-        <img class="profile__avatar" src="./image/image.png" alt="Жак">
-        <div class="profile__info">
-            <div class="profile__container">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button"></button>
+    <header class="header">
+        <img src="./image/logo.png" alt="Логотип" class="header__logo">
+    </header>
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="./image/image.png" alt="Жак">
+            <div class="profile__info">
+                <div class="profile__container">
+                    <h1 class="profile__title">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-button" type="button"></button>
+                </div>
+                <p class="profile__subtitle">Исследователь океана</p>
             </div>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <button class="profile__add-button" type="button"></button>
+        </section>
+        <section class="elements"></section>
+    </main>
+    <footer class="footer">
+        <h2 class="footer__copyright">&copy; 2022 Mesto Russia</h2>
+    </footer>
+    <section class="popup popup_edit">
+        <div class="popup__container">
+            <button type="button" class="popup__close popup__close_edit"></button>
+            <form action="submit" name="ProfileFormEdit" class="popup__form popup__form_edit">
+                <h2 class="popup__title">Редактировать профиль</h2>
+                <input type="text" placeholder="Жак-Ив Кусто" name="name" class="popup__input popup__input_type_name">
+                <input type="text" placeholder="Исследователь океана" name="personal"
+                    class="popup__input popup__input_type_personal">
+                <button type="submit" class="popup__save">Сохранить</button>
+            </form>
         </div>
-        <button class="profile__add-button" type="button"></button>
     </section>
-    <section class="elements"></section>
-</main>
-<footer class="footer">
-    <h2 class="footer__copyright">&copy; 2022 Mesto Russia</h2>
-</footer>
-<section class="popup">
-    <div class="popup__container">
-        <button type="button" class="popup__close">
-            <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close">
-        </button>
-            <form action="submit" name="ProfileForm" class="popup__form popup__form_edit">
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <input type="text" placeholder="Жак-Ив Кусто" name="name" class="popup__input popup__input_type_name">
-            <input type="text" placeholder="Исследователь океана" name="personal" class="popup__input popup__input_type_personal">
-            <button type="submit" class="popup__save">Сохранить</button>
-        </form>
-    </div>
-</section>
-        <section class="popup popup_add">
-            <div class="popup__container">
-                <button type="button" class="popup__close">
-                    <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close popup__close_add">
-                </button>
-                <form action="submit" name="ProfileForm" class="popup__form popup__form_add">
+    <section class="popup popup_add">
+        <div class="popup__container">
+            <button type="button" class="popup__close popup__close_add"></button>
+            <form action="submit" name="ProfileFormAdd" class="popup__form popup__form_add">
                 <h2 class="popup__title">Новое место</h2>
                 <input type="text" placeholder="Название" name="Add-name" class="popup__input popup__input_type_name">
-                <input type="url" placeholder="Ссылка на картинку" name="Url-image" class="popup__input popup__input_type_personal">
+                <input type="url" placeholder="Ссылка на картинку" name="Url-image"
+                    class="popup__input popup__input_type_personal">
                 <button type="submit" class="popup__save popup__save_add">Создать</button>
             </form>
         </div>
-        </section>
-        <div class="popup popup_active">
-            <div class="popup__content">
-            <button class="popup__close" type="button">
-                <img src="./image/CloseIcon.svg" alt="Закрыть" class="popup__close popup__close_image">
-            </button>
+    </section>
+    <section class="popup popup_active">
+        <div class="popup__content">
+            <button class="popup__close popup__close_active" type="button"></button>
             <img class="popup__photo" alt="#" src="#">
             <h2 class="popup__description"></h2>
         </div>
-    </div>
-        <template id='template'>
-            <article class="element">
-                <img class="element__photo" src="#" alt="#">
-                <button class="element__delete-button" type="button"></button>
-                <div class="element__description">
-                  <h2 class="element__title"></h2>
-                  <button class="element__like-button" type="button"></button>
-                </div>
-            </article>
-        </template>
+    </section>
+    <template id='template'>
+        <article class="element">
+            <img class="element__photo" src="#" alt="#">
+            <button class="element__delete-button" type="button"></button>
+            <div class="element__description">
+                <h2 class="element__title"></h2>
+                <button class="element__like-button" type="button"></button>
+            </div>
+        </article>
+    </template>
 
-<script src="./script/script.js"></script>
+    <script src="./script/script.js"></script>
 </body>
+
 </html>
