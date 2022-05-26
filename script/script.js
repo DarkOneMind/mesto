@@ -15,18 +15,17 @@ const personalInfoAdd = document.querySelector('input[name="Url"]');
 const popupImage = document.querySelector('.popup_active');
 const popupPhoto = document.querySelector('.popup__photo');
 const popupDescription = document.querySelector('.popup__description');
-const buttonElement = document.querySelector('.popup__save');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener("keydown", handleEscClick);
-	document.addEventListener("mousedown", handleOverlayClick);
+  document.addEventListener("mousedown", handleOverlayClick);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.addEventListener("keydown", handleEscClick);
-	document.addEventListener("mousedown", handleOverlayClick);
+  document.addEventListener("mousedown", handleOverlayClick);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -83,7 +82,7 @@ function createCard(item) {
   const deleteButton = newPhoto.querySelector('.element__delete-button');
   const elementPhoto = newPhoto.querySelector('.element__photo');
   const elementTitle = newPhoto.querySelector('.element__title');
-  
+
   elementTitle.textContent = item.name;
   elementPhoto.alt = item.name;
   elementPhoto.src = item.link;
@@ -126,22 +125,22 @@ function handleFormAddSubmit(evt) {
   );
   elements.prepend(element);
   closePopup(popupAdd);
-  
+
 }
 render();
 
 function handleOverlayClick(evt) {
-	if (evt.target.classList.contains("popup")) {
-		const popupOpened = document.querySelector(".popup_opened");
-		closePopup(popupOpened);
-	}
+  if (evt.target.classList.contains("popup")) {
+    const popupOpened = document.querySelector(".popup_opened");
+    closePopup(popupOpened);
+  }
 }
 
 function handleEscClick(evt) {
-	if (evt.key === "Escape") {
-		const popupOpened = document.querySelector(".popup_opened");
-		closePopup(popupOpened);
-	}
+  if (evt.key === "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
+    closePopup(popupOpened);
+  }
 }
 
 addButton.addEventListener('click', () => openPopup(popupAdd));

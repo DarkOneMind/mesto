@@ -15,12 +15,3 @@
   opacity: 0;
   transition: visibility .5s, opacity .5s linear;
 }
-
-@media (max-width: 1279px) {
-  .popup {
-    top: 123px;
-    left: 19px;
-    right: 19px;
-    bottom: 123px;
-  }
-}
