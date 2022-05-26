@@ -1,4 +1,4 @@
-.popup__input_type_personal {
+.form__input_type_personal {
   margin-top: 30px;
   margin-left: 36px;
   margin-right: auto;
@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 880px) {
-  .popup__input_type_personal {
+  .form__input_type_personal {
     margin-left: 22px;
   }
 }

@@ -5,13 +5,13 @@ const addButton = document.querySelector('.profile__add-button');
 const popupEdit = document.querySelector('.popup_edit');
 const popupAdd = document.querySelector('.popup_add');
 const closeButtons = document.querySelectorAll('.popup__close');
-const formElementEdit = document.querySelector('.popup__form_edit');
-const formElementAdd = document.querySelector('.popup__form_add');
-const editName = document.querySelector('.popup__input_type_name');
-const editPersonalInfo = document.querySelector('.popup__input_type_personal');
+const formElementEdit = document.querySelector('.form_edit');
+const formElementAdd = document.querySelector('.form_add');
+const editName = document.querySelector('.form__input_type_name');
+const editPersonalInfo = document.querySelector('.form__input_type_personal');
 const elements = document.querySelector('.elements');
 const nameAdd = document.querySelector('input[name="Add-name"]');
-const personalInfoAdd = document.querySelector('input[name="Url-image"]');
+const personalInfoAdd = document.querySelector('input[name="Url"]');
 const popupImage = document.querySelector('.popup_active');
 const popupPhoto = document.querySelector('.popup__photo');
 const popupDescription = document.querySelector('.popup__description');
@@ -42,6 +42,20 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
+
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupEdit);
+  }
+});
+
+document.addEventListener('mousedown', function (evt) {
+  if (evt.target === popupEdit) {
+    closePopup(popupEdit);
+  }
+});
+
 
 const initialCards = [
   {
@@ -99,16 +113,28 @@ function createCard(item) {
     popupPhoto.alt = item.name;
     popupDescription.textContent = item.name;
     openPopup(popupImage);
-  })
+  });
 
+  document.addEventListener('mousedown', function (evt) {
+    if (evt.target === popupImage) {
+      closePopup(popupImage);
+    }
+  });
+
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      closePopup(popupImage);
+    }
+  });
   return newPhoto;
 }
 
 function render() {
-  const outcome = initialCards.map(createCard)
+  const outcome = initialCards.map(createCard);
   elements.append(...outcome);
 }
 render();
+
 
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
@@ -124,14 +150,18 @@ function handleFormAddSubmit(evt) {
   closePopup(popupAdd);
 }
 
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupAdd);
+  }
+});
+
+document.addEventListener('mousedown', function (evt) {
+  if (evt.target === popupAdd) {
+    closePopup(popupAdd);
+  }
+});
+
 addButton.addEventListener('click', () => openPopup(popupAdd));
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 formElementAdd.addEventListener('submit', handleFormAddSubmit);
-
-
-
-
-
-
-
-

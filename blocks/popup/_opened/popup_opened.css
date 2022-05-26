@@ -5,3 +5,7 @@
   visibility: visible;
   opacity: 1;
 }
+
+.popup_opened:hover {
+  cursor: pointer;
+}

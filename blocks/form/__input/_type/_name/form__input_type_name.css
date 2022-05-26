@@ -1,4 +1,4 @@
-.popup__input_type_name {
+.form__input_type_name {
   margin-top: 54px;
   margin-left: 36px;
   margin-right: auto;
@@ -6,7 +6,7 @@
 }
 
 @media (max-width: 880px) {
-  .popup__input_type_name {
+  .form__input_type_name {
     margin-top: 75px;
     margin-left: 22px;
   }

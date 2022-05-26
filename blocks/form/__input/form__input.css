@@ -1,4 +1,4 @@
-.popup__input {
+.form__input {
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -7,11 +7,16 @@
   max-width: 358px;
   min-height: 14px;
   border: none;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  color: #000000;
 }
 
 @media (max-width: 880px) {
-  .popup__input {
+  .form__input {
     max-width: 238px;
   }
+}
+
+.form__input:invalid {
+  border-bottom: 1px solid #ff0000;
 }

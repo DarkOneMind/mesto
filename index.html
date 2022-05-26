@@ -32,11 +32,14 @@
     <section class="popup popup_edit">
         <div class="popup__container">
             <button type="button" class="popup__close popup__close_edit"></button>
-            <form action="submit" name="ProfileFormEdit" class="popup__form popup__form_edit">
+            <form name="ProfileFormEdit" class="form form_edit" novalidate>
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <input type="text" placeholder="Жак-Ив Кусто" name="name" class="popup__input popup__input_type_name">
-                <input type="text" placeholder="Исследователь океана" name="personal"
-                    class="popup__input popup__input_type_personal">
+                <input id="form-name" type="text" placeholder="Жак-Ив Кусто" name="name" class="form__input form__input_type_name" 
+                minlength="2" maxlength="40" required>
+                <span class="form__input_type_error form-name-error" id="form-name-error"></span>
+                <input id="form-personal" type="text" placeholder="Исследователь океана" name="personal" class="form__input form__input_type_personal" 
+                minlength="2" maxlength="200" required>
+                <span class="form__input_type_error form-personal-error" id="form-personal-error"></span>
                 <button type="submit" class="popup__save">Сохранить</button>
             </form>
         </div>
@@ -44,11 +47,14 @@
     <section class="popup popup_add">
         <div class="popup__container">
             <button type="button" class="popup__close popup__close_add"></button>
-            <form action="submit" name="ProfileFormAdd" class="popup__form popup__form_add">
+            <form action="submit" name="ProfileFormAdd" class="form form_add" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input type="text" placeholder="Название" name="Add-name" class="popup__input popup__input_type_name">
-                <input type="url" placeholder="Ссылка на картинку" name="Url-image"
-                    class="popup__input popup__input_type_personal">
+                <input id="form-name-add" type="text" placeholder="Название" name="Add-name" class="form__input form__input_type_name" 
+                minlength="2" maxlength="30" required>
+                <span class="form__input_type_error" id="form-name-add-error"></span>
+                <input id="form-url" type="url" placeholder="Ссылка на картинку" name="Url" 
+                    class="form__input form__input_type_personal" required>
+                    <span class="form__input_type_error" id="form-url-error"></span>
                 <button type="submit" class="popup__save popup__save_add">Создать</button>
             </form>
         </div>
@@ -72,6 +78,7 @@
     </template>
 
     <script src="./script/script.js"></script>
+    <script src="./script/validate.js"></script>
 </body>
 
 </html>
