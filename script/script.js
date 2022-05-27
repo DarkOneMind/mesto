@@ -20,12 +20,13 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener("keydown", handleEscClick);
   document.addEventListener("mousedown", handleOverlayClick);
+  enableValidation(option);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.addEventListener("keydown", handleEscClick);
-  document.addEventListener("mousedown", handleOverlayClick);
+  document.removeEventListener("keydown", handleEscClick);
+  document.removeEventListener("mousedown", handleOverlayClick);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -113,8 +114,6 @@ function render() {
   elements.append(...outcome);
 }
 
-
-
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
   const element = createCard(
@@ -124,21 +123,22 @@ function handleFormAddSubmit(evt) {
     }
   );
   elements.prepend(element);
+  formElementAdd.reset();
   closePopup(popupAdd);
-
 }
+
 render();
 
 function handleOverlayClick(evt) {
-  if (evt.target.classList.contains("popup")) {
-    const popupOpened = document.querySelector(".popup_opened");
+  const popupOpened = document.querySelector('.popup_opened'); //я надеюсь вы это имели в виду)))
+  if (evt.target === popupOpened) {
     closePopup(popupOpened);
   }
 }
 
 function handleEscClick(evt) {
   if (evt.key === "Escape") {
-    const popupOpened = document.querySelector(".popup_opened");
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
 }
