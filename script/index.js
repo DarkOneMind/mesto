@@ -1,3 +1,6 @@
+import { Card } from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 const profileName = document.querySelector('.profile__title');
 const profilePersonalInfo = document.querySelector('.profile__subtitle');
 const editButton = document.querySelector('.profile__edit-button');
@@ -12,9 +15,6 @@ const editPersonalInfo = document.querySelector('.form__input_type_personal');
 const elements = document.querySelector('.elements');
 const nameAdd = document.querySelector('input[name="Add-name"]');
 const personalInfoAdd = document.querySelector('input[name="Url"]');
-const popupImage = document.querySelector('.popup_active');
-const popupPhoto = document.querySelector('.popup__photo');
-const popupDescription = document.querySelector('.popup__description');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -42,12 +42,10 @@ editButton.addEventListener('click', () => {
   openPopup(popupEdit);
 });
 
-
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
-
 
 const initialCards = [
   {
@@ -76,61 +74,25 @@ const initialCards = [
   }
 ];
 
-function createCard(item) {
-  const elementTemplate = document.querySelector('#template').content;
-  const newPhoto = elementTemplate.querySelector('.element').cloneNode(true);
-  const likeButton = newPhoto.querySelector('.element__like-button');
-  const deleteButton = newPhoto.querySelector('.element__delete-button');
-  const elementPhoto = newPhoto.querySelector('.element__photo');
-  const elementTitle = newPhoto.querySelector('.element__title');
-
-  elementTitle.textContent = item.name;
-  elementPhoto.alt = item.name;
-  elementPhoto.src = item.link;
-
-  function toggleLike() {
-    this.classList.toggle('element__like-button_active');
-  }
-
-  function deleteCard(evt) {
-    evt.target.closest('.element').remove();
-  }
-
-  deleteButton.addEventListener('click', deleteCard);
-  likeButton.addEventListener('click', toggleLike);
-
-  elementPhoto.addEventListener('click', () => {
-    popupPhoto.src = item.link;
-    popupPhoto.alt = item.name;
-    popupDescription.textContent = item.name;
-    openPopup(popupImage);
-  });
-
-  return newPhoto;
+function render(link, name) {
+  const outcome = new Card('#template', name, link);
+  elements.prepend(outcome.createCard());
 }
 
-function render() {
-  const outcome = initialCards.map(createCard);
-  elements.append(...outcome);
-}
+initialCards.forEach (function (item){
+  render(item.link, item.name);
+})
 
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
-  const element = createCard(
-    {
-      name: nameAdd.value,
-      link: personalInfoAdd.value,
-    }
-  );
-  elements.prepend(element);
+  const element = render(personalInfoAdd.value, nameAdd.value);
+  elements.append(element);
   formElementAdd.reset();
   closePopup(popupAdd);
 }
 
-render();
-
 function handleOverlayClick(evt) {
-  const popupOpened = document.querySelector('.popup_opened'); //я надеюсь вы это имели в виду)))
+  const popupOpened = document.querySelector('.popup_opened'); 
   if (evt.target === popupOpened) {
     closePopup(popupOpened);
   }
@@ -146,3 +108,19 @@ function handleEscClick(evt) {
 addButton.addEventListener('click', () => openPopup(popupAdd));
 formElementEdit.addEventListener('submit', handleProfileFormSubmit);
 formElementAdd.addEventListener('submit', handleFormAddSubmit);
+
+const option = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.popup__save',
+  inactiveButtonClass: 'popup__save_disabled',
+  inputErrorClass: 'form__input_type_error',
+  errorClass: 'form__input_type_error-visible'
+};
+
+const enableValidation = (option, popup) => {
+  const formValidatorProfile = new FormValidator(option, popup);
+  formValidatorProfile.enableValidation();
+}
+
+export {openPopup}

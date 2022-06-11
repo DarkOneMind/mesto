@@ -1,44 +1,42 @@
-const option = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.popup__save',
-  inactiveButtonClass: 'popup__save_disabled',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__input_type_error-visible'
-};
+export class FormValidator {
+  constructor(option) {
+      this._option = option;
+  }
 
-function showInputError(formElement, inputElement, option) {
+
+
+_showInputError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add(option.inputErrorClass);
-  errorElement.classList.add(option.errorClass);
+  inputElement.classList.add(this._option.inputErrorClass);
+  errorElement.classList.add(this._option.errorClass);
   errorElement.textContent = inputElement.validationMessage;
 }
 
 // Функция, которая удаляет класс с ошибкой
-function hideInputError(formElement, inputElement, option) {
+_hideInputError(formElement, inputElement) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove(option.inputErrorClass);
-  errorElement.classList.remove(option.errorClass);
+  inputElement.classList.remove(this._option.inputErrorClass);
+  errorElement.classList.remove(this._option.errorClass);
   errorElement.textContent = '';
 }
 
 // Функция, которая проверяет валидность поля
-function isValid(formElement, inputElement, option) {
+_isValid(formElement, inputElement) {
   if (!inputElement.validity.valid) {
     // Если поле не проходит валидацию, покажем ошибку
-    showInputError(formElement, inputElement, option);
+    this._showInputError(formElement, inputElement, this._option);
   } else {
     // Если проходит, скроем
-    hideInputError(formElement, inputElement, option);
+    this._hideInputError(formElement, inputElement, this._option);
   }
 }
 
-function setEventListeners(formElement, option) {
+_setEventListeners(formElement) {
   // Находим все поля внутри формы,
   // сделаем из них массив методом Array.from
-  const inputList = Array.from(formElement.querySelectorAll(option.inputSelector));
-  const buttonElement = formElement.querySelector(option.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, option);
+  const inputList = Array.from(formElement.querySelectorAll(this._option.inputSelector));
+  const buttonElement = formElement.querySelector(this._option.submitButtonSelector);
+  this._toggleButtonState(inputList, buttonElement, this._option);
 
   // Обойдём все элементы полученной коллекции
   inputList.forEach((inputElement) => {
@@ -46,16 +44,16 @@ function setEventListeners(formElement, option) {
     inputElement.addEventListener('input', () => {
       // Внутри колбэка вызовем isValid,
       // передав ей форму и проверяемый элемент
-      isValid(formElement, inputElement, option);
-      toggleButtonState(inputList, buttonElement, option);
+      this._isValid(formElement, inputElement, this._option);
+      this._toggleButtonState(inputList, buttonElement, this._option);
     });
   });
 }
 
-function enableValidation(option) {
+enableValidation() {
   // Найдём все формы с указанным классом в DOM,
   // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll(option.formSelector));
+  const formList = Array.from(document.querySelectorAll(this._option.formSelector));
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
@@ -66,27 +64,27 @@ function enableValidation(option) {
 
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
-    setEventListeners(formElement, option);
+    this._setEventListeners(formElement, this._option);
   });
 }
 
-enableValidation(option);
-
-function hasInvalidInput(inputList) {
+_hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 }
 
-function toggleButtonState(inputList, buttonElement, option) {
+_toggleButtonState(inputList, buttonElement) {
   // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(option.inactiveButtonClass);
+  if (this._hasInvalidInput(inputList)) {
+    buttonElement.classList.add(this._option.inactiveButtonClass);
     buttonElement.disabled = true;
 
 
   } else {
-    buttonElement.classList.remove(option.inactiveButtonClass);
+    buttonElement.classList.remove(this._option.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 }
+}
+
