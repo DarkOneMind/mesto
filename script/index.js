@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import { FormValidator } from './FormValidator.js';
 
 const profileName = document.querySelector('.profile__title');
 const profilePersonalInfo = document.querySelector('.profile__subtitle');
@@ -15,12 +15,14 @@ const editPersonalInfo = document.querySelector('.form__input_type_personal');
 const elements = document.querySelector('.elements');
 const nameAdd = document.querySelector('input[name="Add-name"]');
 const personalInfoAdd = document.querySelector('input[name="Url"]');
+const popupImage = document.querySelector('.popup_active');
+const popupPhoto = document.querySelector('.popup__photo');
+const popupDescription = document.querySelector('.popup__description');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener("keydown", handleEscClick);
   document.addEventListener("mousedown", handleOverlayClick);
-  enableValidation(option);
 }
 
 function closePopup(popup) {
@@ -75,26 +77,31 @@ const initialCards = [
 ];
 
 function render(link, name) {
-  const outcome = new Card('#template', name, link);
-  elements.prepend(outcome.createCard());
+  const outcome = createCard(name, link);
+  elements.prepend(outcome);
 }
 
-initialCards.forEach (function (item){
+initialCards.forEach(function (item) {
   render(item.link, item.name);
 })
 
+function createCard(name, link) {
+  const cardElement = new Card('#template', name, link).generateCard();
+  return cardElement
+}
+
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
-  const element = render(personalInfoAdd.value, nameAdd.value);
-  elements.append(element);
+  render(personalInfoAdd.value, nameAdd.value);
+  const resetForm = new FormValidator(option, formElementAdd);
+  resetForm.resetValidation();
   formElementAdd.reset();
   closePopup(popupAdd);
 }
 
 function handleOverlayClick(evt) {
-  const popupOpened = document.querySelector('.popup_opened'); 
-  if (evt.target === popupOpened) {
-    closePopup(popupOpened);
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
   }
 }
 
@@ -103,6 +110,13 @@ function handleEscClick(evt) {
     const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   }
+}
+
+export function handleCardClick(name, link) {
+  popupPhoto.src = link;
+  popupPhoto.alt = name;
+  popupDescription.textContent = name;
+  openPopup(popupImage);
 }
 
 addButton.addEventListener('click', () => openPopup(popupAdd));
@@ -118,9 +132,7 @@ const option = {
   errorClass: 'form__input_type_error-visible'
 };
 
-const enableValidation = (option, popup) => {
-  const formValidatorProfile = new FormValidator(option, popup);
-  formValidatorProfile.enableValidation();
-}
-
-export {openPopup}
+const formValidatorEditProfile = new FormValidator(option, formElementEdit);
+formValidatorEditProfile.enableValidation();
+const formValidatorAddProfile = new FormValidator(option, formElementAdd);
+formValidatorAddProfile.enableValidation();
