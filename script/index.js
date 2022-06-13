@@ -93,9 +93,8 @@ function createCard(name, link) {
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
   render(personalInfoAdd.value, nameAdd.value);
-  const resetForm = new FormValidator(option, formElementAdd);
-  resetForm.resetValidation();
   formElementAdd.reset();
+  formValidatorAddProfile.resetValidation();
   closePopup(popupAdd);
 }
 
