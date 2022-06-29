@@ -9,37 +9,36 @@ import { initialCards } from '../script/initialCards.js';
 
 const profileName = document.querySelector('.profile__title');
 const profilePersonalInfo = document.querySelector('.profile__subtitle');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
-const editName = document.querySelector('.popup__input_type_name');
-const editPersonalInfo = document.querySelector('.popup__input_type_personal');
+const buttonEdit = document.querySelector('.profile__edit-button');
+const buttonAdd = document.querySelector('.profile__add-button');
+const nameEdit = document.querySelector('.popup__input_type_name');
+const personalInfoEdit = document.querySelector('.popup__input_type_personal');
 const elements = document.querySelector('.elements');
 const nameAdd = document.querySelector('input[name="Add-name"]');
 const personalInfoAdd = document.querySelector('input[name="Url"]');
-const addForm = document.querySelector('.popup__form_add');
-const editForm = document.querySelector('.popup__form_edit');
+const formAdd = document.querySelector('.popup__form_add');
+const formEdit = document.querySelector('.popup__form_edit');
 const userInfo = new UserInfo({ profileName, profilePersonalInfo });
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = editName.value;
-  profilePersonalInfo.textContent = editPersonalInfo.value;
+  profileName.textContent = nameEdit.value;
+  profilePersonalInfo.textContent = personalInfoEdit.value;
   formElementEdit.close();
 }
 
-editButton.addEventListener('click', () => {
+buttonEdit.addEventListener('click', () => {
   const user = userInfo.getUserInfo();
-  editName.value = user.name;
-  editPersonalInfo.value = user.personalInfo;
+  nameEdit.value = user.name;
+  personalInfoEdit.value = user.personalInfo;
   formElementEdit.open();
 });
 
 const cards = new Section({
   items: initialCards,
   renderer: (data) => {
-    const outcome = createCard(data);
-    const cardGenerate = outcome.generateCard();
-    cards.addItem(cardGenerate);
+    const cardSection = createCard(data).generateCard();
+    cards.addItem(cardSection);
   }
 },
   elements);
@@ -58,9 +57,8 @@ function createCard(data) {
 const formElementAdd = new PopupWithForm({
   popupSelector: '.popup_add',
   handleSubmit: (data) => {
-    const cardElement = createCard(data);
-    const cardGenerate = cardElement.generateCard();
-    cards.addItem(cardGenerate, 'prepend');
+    const cardElement = createCard(data).generateCard();
+    cards.addItem(cardElement, 'prepend');
   }
 })
 
@@ -89,9 +87,9 @@ function handleFormAddSubmit(evt) {
   formValidatorAddProfile.resetValidation();
 }
 
-addButton.addEventListener('click', () => formElementAdd.open());
-editForm.addEventListener('submit', handleProfileFormSubmit);
-addForm.addEventListener('submit', handleFormAddSubmit);
+buttonAdd.addEventListener('click', () => formElementAdd.open());
+formEdit.addEventListener('submit', handleProfileFormSubmit);
+formAdd.addEventListener('submit', handleFormAddSubmit);
 
 const option = {
   formSelector: '.popup__form',
@@ -102,7 +100,7 @@ const option = {
   errorClass: 'popup__input_type_error-visible'
 };
 
-const formValidatorEditProfile = new FormValidator(option, editForm);
+const formValidatorEditProfile = new FormValidator(option, formEdit);
 formValidatorEditProfile.enableValidation();
-const formValidatorAddProfile = new FormValidator(option, addForm);
+const formValidatorAddProfile = new FormValidator(option, formAdd);
 formValidatorAddProfile.enableValidation();
