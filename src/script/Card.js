@@ -1,11 +1,9 @@
-import { handleCardClick } from './index.js';
-
 export class Card {
-  constructor(cardSelector, name, link, handleCardClick) {
+  constructor(cardSelector, data, handleCardClick) {
     this._cardSelector = cardSelector;
-    this._name = name;
-    this._link = link;
-    this._handleCardClick = handleCardClick;
+    this._name = data.name;
+    this._link = data.link;
+    this._handleCardClick = handleCardClick.handleCardClick;
   }
 
   _getTemplate() {
@@ -29,7 +27,7 @@ export class Card {
       this._toggleLike(evt);
     })
     this._element.querySelector('.element__photo').addEventListener('click', () => {
-      handleCardClick(this._name, this._link)
+      this._handleCardClick()
     });
   }
 
