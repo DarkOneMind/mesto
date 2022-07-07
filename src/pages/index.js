@@ -37,7 +37,7 @@ buttonEdit.addEventListener('click', () => {
 const cards = new Section({
   items: initialCards,
   renderer: (data) => {
-    const cardSection = createCard(data).generateCard();
+    const cardSection = createCard(data).generateCard(); 
     cards.addItem(cardSection);
   }
 },
