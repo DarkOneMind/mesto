@@ -5,6 +5,7 @@ export class UserInfo {
   }
 
   setUserInfo(data) {
+    this.myId = data._id;
     this._name = data.name;
     this._personalInfo = data.personalInfo;
   }
@@ -15,5 +16,8 @@ export class UserInfo {
       personalInfo: this._personalInfo,
     };
     return data;
+  }
+  getId() {
+    return this._id;
   }
 }
