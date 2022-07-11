@@ -16,23 +16,6 @@
 
 **Git Pages**
 
-* [Ссылка на сайт в GitHub Pages]( https://darkonemind.github.io/mesto)
+* [Ссылка на сайт в GitHub Pages](https://darkonemind.github.io/mesto/index.html)
 
-
-
-  const popupDelete = new PopupDelete(
-    buttonDelete, 
-    function handleSubmitForm(evt) {
-      evt.preventDefault();
-      api.deleteCard(popupDelete.cardId)
-        .then(() => {
-          popupDelete.element.remove();
-          delete popupDelete.element;
-          popupDelete.close();
-        })
-        .catch(err => console.log(err));
-    }
-  );
-  
-  popupDelete.setEventListeners();
   
