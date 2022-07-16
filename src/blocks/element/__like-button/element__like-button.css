@@ -5,9 +5,12 @@
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
-  padding-right: 50px;
+  padding-right: 20px;
   box-sizing: border-box;
   border: none;
   background-color: #fff;
   transition: .2s;
+  margin-right: 20px;
+  margin-bottom: 3px;
+  margin-top: 15px;
 }

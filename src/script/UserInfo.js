@@ -2,22 +2,22 @@ export class UserInfo {
   constructor(userSelector) {
     this._name = userSelector.profileName.textContent;
     this._personalInfo = userSelector.profilePersonalInfo.textContent;
+    this._userAvatar = userSelector.src;
   }
 
   setUserInfo(data) {
-    this.myId = data._id;
     this._name = data.name;
-    this._personalInfo = data.personalInfo;
+    this._personalInfo = data.about;
+    this._userAvatar = data.avatar;
   }
 
   getUserInfo() {
-    const data = {
+    const userInfo = {
       name: this._name,
-      personalInfo: this._personalInfo,
+      about: this._personalInfo,
+      avatar: this._userAvatar,
     };
-    return data;
+    return userInfo;
   }
-  getId() {
-    return this._id;
-  }
+  
 }

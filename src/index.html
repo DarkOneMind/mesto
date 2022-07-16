@@ -2,6 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
 </head>
@@ -37,7 +38,7 @@
                 <input id="popup-name" type="text" placeholder="Жак-Ив Кусто" name="name"
                     class="popup__input popup__input_type_name" minlength="2" maxlength="40" required>
                 <span class="popup__input-error popup-name-error" id="popup-name-error"></span>
-                <input id="popup-personal" type="text" placeholder="Исследователь океана" name="personal"
+                <input id="popup-personal" type="text" placeholder="Исследователь океана" name="about"
                     class="popup__input popup__input_type_personal" minlength="2" maxlength="200" required>
                 <span class="popup__input-error popup-personal-error" id="popup-personal-error"></span>
                 <button type="submit" class="popup__save popup__save_edit">Сохранить</button>
@@ -49,10 +50,10 @@
             <button type="button" class="popup__close popup__close_add"></button>
             <form name="ProfileFormAdd" class="popup__form popup__form_add" novalidate>
                 <h2 class="popup__title">Новое место</h2>
-                <input id="popup-name-add" type="text" placeholder="Название" name="Add-name"
+                <input id="popup-name-add" type="text" placeholder="Название" name="name"
                     class="popup__input popup__input_type_name" minlength="2" maxlength="30" required>
                 <span class="popup__input-error" id="popup-name-add-error"></span>
-                <input id="popup-url" type="url" placeholder="Ссылка на картинку" name="Url"
+                <input id="popup-url" type="url" placeholder="Ссылка на картинку" name="link"
                     class="popup__input popup__input_type_personal" required>
                 <span class="popup__input-error" id="popup-url-error"></span>
                 <button type="submit" class="popup__save popup__save_add">Создать</button>
@@ -80,9 +81,9 @@
             <button type="button" class="popup__close popup__close_avatar"></button>
             <form name="Avatar" class="popup__form popup__form_avatar" novalidate>
                 <h2 class="popup__title">Обновить аватар</h2>
-                <input type="url" id="avatar-input" name="Url" 
+                <input type="url" id="popup-url-avatar" name="avatar" 
                 class="popup__input popup__input_type_avatar" placeholder="Ссылка на картинку" required/>
-                <span class="popup__input-error" id="avatar-url-error"></span>
+                <span class="popup__input-error" id="popup-url-avatar-error"></span>
                 <button type="submit" class="popup__save popup__save_avatar">Сохранить</button>
             </form>
         </div>
@@ -93,9 +94,12 @@
             <button class="element__delete-button" type="button"></button>
             <div class="element__description">
                 <h2 class="element__title"></h2>
+                <div class="element__like">
                 <button class="element__like-button" type="button"></button>
                 <div class="element__like-counter"></div>
             </div>
+            </div>
+            
         </article>
     </template>
 </body>
