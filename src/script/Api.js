@@ -9,7 +9,7 @@ export class Api {
       method: "GET",
       headers: this._headers,
     })
-      .then(this._error);
+      .then(this._checkResponse);
   }
 
   getUserInfo() { //Загрузка информации о пользователе с сервера
@@ -17,7 +17,7 @@ export class Api {
       method: "GET",
       headers: this._headers,
     })
-      .then(this._error);
+      .then(this._checkResponse);
   }
 
   updateUserInfo(data) {
@@ -29,7 +29,7 @@ export class Api {
         about: data.about,
       })
     })
-      .then(this._error)
+      .then(this._checkResponse)
   };
 
   addCard(data) { //Добавление новой карточки
@@ -41,7 +41,7 @@ export class Api {
         link: data.link,
       })
     })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
   deleteCards(data) { //Удаление карточки
@@ -49,7 +49,7 @@ export class Api {
       method: "DELETE",
       headers: this._headers,
     })
-      .then(this._error);
+      .then(this._checkResponse);
   }
 
   like(data) { //Постановка лайка
@@ -57,7 +57,7 @@ export class Api {
       method: "PUT",
       headers: this._headers,
     })
-      .then(this._error);
+      .then(this._checkResponse);
   }
 
   dislike(data) { //Снятие лайка
@@ -65,7 +65,7 @@ export class Api {
       method: "DELETE",
       headers: this._headers
     })
-      .then(this._error);
+      .then(this._checkResponse);
   }
 
   updateAvatar(data) { //Обновление аватара пользователя
@@ -76,14 +76,14 @@ export class Api {
         avatar: data.avatar,
       })
     })
-      .then(this._error);
+      .then(this._checkResponse);
   }
 
-  renderCards() {
+  getAppData() {
     return Promise.all([this.getUserInfo(), this.getInitialCards()])
   }
-  
-  _error(res) {
+
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }

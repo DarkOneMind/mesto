@@ -6,14 +6,20 @@ export class PopupWithForm extends Popup {
     this._handleSubmit = handleSubmit;
     this._submitButton = this._popup.querySelector('.popup__save-button');
     this._popupFormElement = this._popup.querySelector('.popup__form');
+    this._inputList = Array.from(this._popupFormElement.querySelectorAll('.popup__input'));
   }
 
   _getInputValues() {
     const inputValues = {};
-    const inputList = Array.from(this._popupFormElement.querySelectorAll('.popup__input'));
-    inputList.forEach(input => inputValues[input.name] = input.value);
-
+    this._inputList.forEach(input => inputValues[input.name] = input.value);
     return inputValues;
+  }
+
+  setInputValues(data) {
+    this._inputList.forEach((input) => {
+      // тут вставляем в `value` инпута данные из объекта по атрибуту `name` этого инпута
+      input.value = data[input.name];
+    });
   }
 
   setEventListeners() {
@@ -27,4 +33,5 @@ export class PopupWithForm extends Popup {
     this._popupFormElement.reset();
     super.close();
   }
+
 }

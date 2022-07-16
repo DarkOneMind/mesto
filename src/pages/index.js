@@ -7,23 +7,28 @@ import { Section } from '../script/Section.js';
 import { PopupWithForm } from '../script/PopupWithForm.js';
 import { Api } from '../script/Api.js';
 import { PopupDelete } from '../script/PopupDelete.js';
+import {
+  profileName,
+  profilePersonalInfo,
+  profileAvatar,
+  buttonEdit,
+  buttonAdd,
+  buttonAvatar,
+  nameEdit,
+  personalInfoEdit,
+  elements,
+  formAdd,
+  formEdit,
+  formAvatar,
+  buttonSaveEdit,
+  buttonSaveAdd,
+  buttonSaveAvatar,
+  option,
+} from '../utils/constants.js';
 
-const profileName = document.querySelector('.profile__title');
-const profilePersonalInfo = document.querySelector('.profile__subtitle');
-const profileAvatar = document.querySelector('.profile__avatar');
-const buttonEdit = document.querySelector('.profile__edit-button');
-const buttonAdd = document.querySelector('.profile__add-button');
-const buttonAvatar = document.querySelector('.profile__avatar-button');
-const nameEdit = document.querySelector('.popup__input_type_name');
-const personalInfoEdit = document.querySelector('.popup__input_type_personal');
-const elements = document.querySelector('.elements');
-const formAdd = document.querySelector('.popup__form_add');
-const formEdit = document.querySelector('.popup__form_edit');
-const formAvatar = document.querySelector('.popup__form_avatar');
+
 const userInfo = new UserInfo({ profileName, profilePersonalInfo });
-const buttonSaveEdit = document.querySelector('.popup__save_edit');
-const buttonSaveAdd = document.querySelector('.popup__save_add');
-const buttonSaveAvatar = document.querySelector('.popup__save_avatar');
+
 
 
 const api = new Api({
@@ -34,7 +39,7 @@ const api = new Api({
   }
 });
 
-api.renderCards()
+api.getAppData()
   .then(([user, data]) => {
     userInfo.setUserInfo({ name: user.name, about: user.about, avatar: user.avatar });
     cards.renderItems({ cards: data, userId: user._id })
@@ -56,6 +61,7 @@ function renderAddLoading(isLoading, button) {
     button.textContent = "создать";
   }
 }
+
 
 const cards = new Section({
   renderer: (data) => {
@@ -90,7 +96,8 @@ function createCard(data, userId) {
 
   function handleLikeClick() {
     api.like(data)
-      .then(() => {
+      .then((data) => {
+        card.handleLike(data)
         console.log("Лайк");
       })
       .catch((err) => {
@@ -99,14 +106,14 @@ function createCard(data, userId) {
   }
   function handleDeleteLike() {
     api.dislike(data)
-      .then(() => {
+      .then((data) => {
+        card.handleLike(data)
         console.log("Дизлайк");
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
 }
 
 const formElementAdd = new PopupWithForm({
@@ -181,28 +188,29 @@ formElementAvatar.setEventListeners();
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
-  profileName.textContent = nameEdit.value;
-  profilePersonalInfo.textContent = personalInfoEdit.value;
+  formElementEdit.setInputValues(userInfo.getUserInfo());
   formElementEdit.close();
 }
 
 function handleFormAddSubmit(evt) {
   evt.preventDefault();
   formElementAdd.close();
-  formValidatorAddProfile.resetValidation();
 }
 
 function handleFormAvatarSubmit(evt) {
   evt.preventDefault();
   formElementAvatar.close();
-  formValidatorAvatar.resetValidation();
 }
 
-buttonAvatar.addEventListener('click', () => formElementAvatar.open());
-buttonAdd.addEventListener('click', () => formElementAdd.open());
-formEdit.addEventListener('submit', handleProfileFormSubmit);
-formAdd.addEventListener('submit', handleFormAddSubmit);
-formAvatar.addEventListener('submit', handleFormAvatarSubmit);
+buttonAvatar.addEventListener('click', () => {
+  formElementAvatar.open();
+  formValidatorAvatar.resetValidation();
+});
+buttonAdd.addEventListener('click', () => {
+  formElementAdd.open();
+  formValidatorAddProfile.resetValidation();
+});
+
 buttonEdit.addEventListener('click', () => {
   const user = userInfo.getUserInfo();
   nameEdit.value = user.name;
@@ -210,14 +218,9 @@ buttonEdit.addEventListener('click', () => {
   formElementEdit.open();
 });
 
-const option = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save',
-  inactiveButtonClass: 'popup__save_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input_type_error-visible'
-};
+formEdit.addEventListener('submit', handleProfileFormSubmit);
+formAdd.addEventListener('submit', handleFormAddSubmit);
+formAvatar.addEventListener('submit', handleFormAvatarSubmit);
 
 const formValidatorEditProfile = new FormValidator(option, formEdit);
 formValidatorEditProfile.enableValidation();

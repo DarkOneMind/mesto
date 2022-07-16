@@ -10,7 +10,6 @@ export class Card {
     this._handleLikeClick = handleLikeClick;
     this._userId = userId;
     this._handleDeleteLike = handleDeleteLike;
-    this._length = length;
   }
 
   _getTemplate() {
@@ -18,21 +17,9 @@ export class Card {
     return newPhoto
   }
 
-  _toggleLike() {
-    if (event.target.classList.contains('element__like-button_active')) {
-      event.target.classList.remove('element__like-button_active');
-      this._counter.textContent = this._likes.length -= 1;
-      this._handleDeleteLike(this._data);
-    } else {
-      event.target.classList.add('element__like-button_active');
-      this._counter.textContent = this._likes.length += 1;
-      this._handleLikeClick(this._data);
-    }
-  }
-
   _isLiked() {
     if (this._likes.some((like) => like._id === this._userId)) {
-      this._element.querySelector('.element__like-button').classList.add('element__like-button_active');
+      this._likeButton.classList.add('element__like-button_active');
     }
   }
 
@@ -42,14 +29,19 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__like-button').addEventListener('click', () => {
-      this._toggleLike(this._data);
+    this._likeButton.addEventListener('click', () => { // слушатель на постановку и снятие лайка
+      if (this._likeButton.classList.contains('element__like-button_active')) {
+        this._handleDeleteLike(this._data);
+      } else {
+        this._handleLikeClick(this._data);
+      }
     })
-    this._element.querySelector('.element__photo').addEventListener('click', () => {
+
+    this._elementPhoto.addEventListener('click', () => {
       this._handleCardClick(this._data)
     })
     if (this._ownerId === this._userId) {
-      this._element.querySelector('.element__delete-button').addEventListener("click", () => {
+      this._deleteButton.addEventListener("click", () => {
         this._handleCardDelete(this._data);
       });
     }
@@ -62,6 +54,12 @@ export class Card {
     return false;
   }
 
+  handleLike(data) {
+    this._likes = data.likes;
+    this._counter.textContent = this._likes.length;
+    this._likeButton.classList.toggle('element__like-button_active');
+  }
+
   generateCard() {
     this._element = this._getTemplate();
     this._deleteButton = this._element.querySelector('.element__delete-button');
@@ -69,16 +67,17 @@ export class Card {
       this._deleteButton.remove();
       this._deleteButton = null
     }
-    this._isLiked();
+
     this._likeButton = this._element.querySelector('.element__like-button');
+    this._isLiked();
     this._counter = this._element.querySelector('.element__like-counter');
     this._counter.textContent = this._likes.length;
-    const elementPhoto = this._element.querySelector('.element__photo');
-    const elementTitle = this._element.querySelector('.element__title');
+    this._elementPhoto = this._element.querySelector('.element__photo');
+    this._elementTitle = this._element.querySelector('.element__title');
 
-    elementTitle.textContent = this._name;
-    elementPhoto.alt = this._name;
-    elementPhoto.src = this._link;
+    this._elementTitle.textContent = this._name;
+    this._elementPhoto.alt = this._name;
+    this._elementPhoto.src = this._link;
     this._setEventListeners();
     return this._element;
   }
