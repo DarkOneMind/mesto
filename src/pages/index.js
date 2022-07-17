@@ -1,12 +1,12 @@
 import './index.css';
-import { Card } from '../script/Card.js';
-import { FormValidator } from '../script/FormValidator.js';
-import { UserInfo } from '../script/UserInfo.js';
-import { PopupWithImage } from '../script/PopupWithImage.js';
-import { Section } from '../script/Section.js';
-import { PopupWithForm } from '../script/PopupWithForm.js';
-import { Api } from '../script/Api.js';
-import { PopupDelete } from '../script/PopupDelete.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
+import { Section } from '../components/Section.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import Api from '../components/Api.js';
+import { PopupDelete } from '../components/PopupDelete.js';
 import {
   profileName,
   profilePersonalInfo,
@@ -26,10 +26,7 @@ import {
   option,
 } from '../utils/constants.js';
 
-
-const userInfo = new UserInfo({ profileName, profilePersonalInfo });
-
-
+const userInfo = new UserInfo({ profileName, profilePersonalInfo, profileAvatar });
 
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-45',
@@ -62,14 +59,12 @@ function renderAddLoading(isLoading, button) {
   }
 }
 
-
 const cards = new Section({
   renderer: (data) => {
     cards.addItem(createCard(data.card, data.userId));
   }
 },
   elements);
-
 
 function createCard(data, userId) {
   const card = new Card('#template', data, handleCardClick, handleCardDelete, handleLikeClick, handleDeleteLike, userId)
@@ -164,7 +159,7 @@ const formElementAvatar = new PopupWithForm({
     api
       .updateAvatar(data)
       .then((data) => {
-        profileAvatar.src = data.avatar;
+        userInfo.setUserInfo(data);
         formElementAvatar.close();
         console.log("Аватар обновлен");
       })
@@ -186,22 +181,6 @@ formElementAdd.setEventListeners();
 formElementEdit.setEventListeners();
 formElementAvatar.setEventListeners();
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-  formElementEdit.setInputValues(userInfo.getUserInfo());
-  formElementEdit.close();
-}
-
-function handleFormAddSubmit(evt) {
-  evt.preventDefault();
-  formElementAdd.close();
-}
-
-function handleFormAvatarSubmit(evt) {
-  evt.preventDefault();
-  formElementAvatar.close();
-}
-
 buttonAvatar.addEventListener('click', () => {
   formElementAvatar.open();
   formValidatorAvatar.resetValidation();
@@ -217,10 +196,6 @@ buttonEdit.addEventListener('click', () => {
   personalInfoEdit.value = user.about;
   formElementEdit.open();
 });
-
-formEdit.addEventListener('submit', handleProfileFormSubmit);
-formAdd.addEventListener('submit', handleFormAddSubmit);
-formAvatar.addEventListener('submit', handleFormAvatarSubmit);
 
 const formValidatorEditProfile = new FormValidator(option, formEdit);
 formValidatorEditProfile.enableValidation();

@@ -23,15 +23,15 @@ export class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    this._popupFormElement.addEventListener('submit', () => {
-      this._handleSubmit(this._getInputValues(), this._submitButton);
-    });
     super.setEventListeners();
+    this._popupFormElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      this._handleSubmit(this._getInputValues(), this._submitButton);
+    }); 
   }
 
   close() {
     this._popupFormElement.reset();
     super.close();
   }
-
 }
